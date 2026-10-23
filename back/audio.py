@@ -5,7 +5,10 @@ from pedalboard.io import AudioFile
 def func_trim_volume(var_srcpath, var_output, var_start_sec, var_end_sec, var_volume_db):
     var_audio = AudioSegment.from_file(var_srcpath)
     var_start = (int(var_start_sec)*1000)
-    var_end = (int(var_end_sec)*1000)
+    if var_end_sec > 0 :
+        var_end = (int(var_end_sec)*1000)
+    else:
+        var_end =   len(var_audio)
     var_audio = var_audio[var_start:var_end]
     var_audio = var_audio + var_volume_db
     var_audio.export(var_output, format = "wav")
@@ -33,6 +36,7 @@ def func_add_reverb(var_srcpath, var_output, var_room_size, var_wet_level):
         var_writer.write(var_rev)
         
     return var_output
+
 def func_manual_night_day(var_srcpath, var_output, var_speed, var_pitch):
     with AudioFile(var_srcpath) as var_reader:
         var_audio_data = var_reader.read(var_reader.frames)
