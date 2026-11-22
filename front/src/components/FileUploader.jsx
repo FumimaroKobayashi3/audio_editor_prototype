@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import './themes.css'
 
 export default function FileUploader({SetScreen, SetFileName}) {
     const [Status , setStatus] = useState('')
@@ -41,10 +42,11 @@ export default function FileUploader({SetScreen, SetFileName}) {
             <p>Server Status: {Status}</p>
             <input
                 type="file"
-                accept="audio/*"
+                accept=".wav,audio/wav"
                 onChange={(event) => setFile(event.target.files[0])}
             />
             <button onClick={handleUpload}>Upload</button>
+            <p className="hint">temporarily available .wav only</p>
         </div>
         </>
     )

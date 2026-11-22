@@ -21,7 +21,7 @@ var_shut = shutil
 
 var_app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:5173"],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -58,12 +58,11 @@ def func_get_audio(var_filename: str):
 @var_app.post("/audio_process")
 def func_audioprocess(var_req: ProcessRequest):
     var_src = "audio_upload/" + var_req.var_filename
-    var_out_name = "processed_" + var_req.var_filename
+    var_out_name = "processed_" + var_req.var_filename + ".wav"
     var_dist = "audio_upload/" + var_out_name
     var_step1 = "audio_upload/temp_cut.wav"
-    audio.func_manual_night_day(var_src, var_step1, var_req.var_speed, var_req.var_pitch)
-    audio.func_manual_night_day(var_step1, var_dist, var_req.var_speed, var_req.var_pitch)
     var_step2 = "audio_upload/temp_speed.wav"
+    audio.func_trim_volume(var_src, var_step1, var_req.var_start_sec, var_req.var_end_sec, var_req.var_volume_db)
     audio.func_manual_night_day(var_step1, var_step2, var_req.var_speed, var_req.var_pitch)
     audio.func_add_reverb(var_step2, var_dist, var_req.var_reverb_room, var_req.var_reverb_wet)
     return({"key_status": 200, "key_result_file": var_out_name})

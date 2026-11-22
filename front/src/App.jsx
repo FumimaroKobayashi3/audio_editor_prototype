@@ -9,7 +9,7 @@ function App() {
 
   function HandleRenderScreen(){
     if (Screen === 'FileProcessing') {
-      return <FileProcessing FileName={FileName} />
+      return <FileProcessing FileName={FileName} SetScreen={SetScreen}/>
     }
     else{
       return <FileUploader SetScreen={SetScreen} SetFileName={SetFileName} />

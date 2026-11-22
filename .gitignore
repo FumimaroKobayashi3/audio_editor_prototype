@@ -1,7 +1,21 @@
+# Python / Backend
 venv/
+.venv/
 __pycache__/
 *.pyc
+*.pyo
+.env
+tempCodeRunnerFile.py
+audio_upload/
+
+# Node / Frontend
 node_modules/
 dist/
-audio_upload/*.wav
-tempCodeRunnerFile.py
+dist-ssr/
+*.local
+*.log
+
+# OS / Editors
+.DS_Store
+.vscode/
+.idea/

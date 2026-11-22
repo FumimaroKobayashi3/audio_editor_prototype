@@ -1,4 +1,5 @@
 import {useState} from "react"
+import "./themes.css"
 
 export default function FileProcessing({SetScreen, FileName}) {
     const [Pitch, setPitch] = useState(0.0)
