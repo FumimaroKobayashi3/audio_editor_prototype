@@ -1,10 +1,14 @@
+import os
+_bin_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bin")
+os.environ["PATH"] = _bin_dir + os.pathsep + os.environ.get("PATH", "")
+
 from pydub import AudioSegment
-import imageio_ffmpeg
 from pedalboard import Pedalboard, Reverb, time_stretch
 from pedalboard.io import AudioFile
 
 #ffmpeg is here
-AudioSegment.converter =  imageio_ffmpeg.get_ffmpeg_exe()
+AudioSegment.converter = os.path.join(_bin_dir, "ffmpeg.exe")
+AudioSegment.ffprobe = os.path.join(_bin_dir, "ffprobe.exe")
 
 def func_trim_volume(var_srcpath, var_output, var_start_sec, var_end_sec, var_volume_db):
     var_audio = AudioSegment.from_file(var_srcpath)

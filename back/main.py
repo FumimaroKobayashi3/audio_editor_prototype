@@ -2,6 +2,7 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import RedirectResponse, FileResponse
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import shutil
 import audio
 
@@ -21,15 +22,12 @@ var_shut = shutil
 
 var_app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:8000", "http://127.0.0.1:8000", "http://localhost:5173"],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@var_app.get("/")
-def func_launch():
-    return RedirectResponse(url="http://localhost:5173")
 
 @var_app.get("/ping")
 def func_ping():
@@ -66,3 +64,5 @@ def func_audioprocess(var_req: ProcessRequest):
     audio.func_manual_night_day(var_step1, var_step2, var_req.var_speed, var_req.var_pitch)
     audio.func_add_reverb(var_step2, var_dist, var_req.var_reverb_room, var_req.var_reverb_wet)
     return({"key_status": 200, "key_result_file": var_out_name})
+
+var_app.mount("/", StaticFiles(directory="../front/dist", html=True), name="static")
