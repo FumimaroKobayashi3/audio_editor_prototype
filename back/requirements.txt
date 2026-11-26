@@ -5,4 +5,4 @@ pydub
 pedalboard
 requests
 audioop-lts
-audio
+imageio-ffmpeg

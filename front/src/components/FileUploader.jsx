@@ -42,11 +42,10 @@ export default function FileUploader({SetScreen, SetFileName}) {
             <p>Server Status: {Status}</p>
             <input
                 type="file"
-                accept=".wav,audio/wav"
+                accept="audio/*"
                 onChange={(event) => setFile(event.target.files[0])}
             />
             <button onClick={handleUpload}>Upload</button>
-            <p className="hint">temporarily available .wav only</p>
         </div>
         </>
     )

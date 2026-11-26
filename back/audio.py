@@ -1,6 +1,10 @@
 from pydub import AudioSegment
+import imageio_ffmpeg
 from pedalboard import Pedalboard, Reverb, time_stretch
 from pedalboard.io import AudioFile
+
+#ffmpeg is here
+AudioSegment.converter =  imageio_ffmpeg.get_ffmpeg_exe()
 
 def func_trim_volume(var_srcpath, var_output, var_start_sec, var_end_sec, var_volume_db):
     var_audio = AudioSegment.from_file(var_srcpath)
